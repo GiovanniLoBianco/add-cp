@@ -9,6 +9,7 @@ import org.chocosolver.util.ESat;
  * 
  * Propagator of an AADD (Affine Algebraic Decision Diagram) constraint
  * 
+ * 
  * @author giovannilobianco
  *
  */
