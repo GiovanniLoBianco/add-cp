@@ -1435,6 +1435,26 @@ public class ADD extends DD {
 			}
 		}
 			break;
+		
+		case COMP_LESSEQ: {
+			if ((a1 instanceof ADDDNode) && (a2 instanceof ADDDNode)) {
+				double min = ((ADDDNode) a1)._dLower <= ((ADDDNode) a2)._dLower ? 1d : 0d;
+				double max = ((ADDDNode) a1)._dUpper <= ((ADDDNode) a2)._dUpper ? 1d : 0d;
+				ret = getDNode(min, max, true);
+			}
+
+		}
+			break;
+
+		case COMP_GREATEQ: {
+			if ((a1 instanceof ADDDNode) && (a2 instanceof ADDDNode)) {
+				double min = ((ADDDNode) a1)._dLower >= ((ADDDNode) a2)._dLower ? 1d : 0d;
+				double max = ((ADDDNode) a1)._dUpper >= ((ADDDNode) a2)._dUpper ? 1d : 0d;
+				ret = getDNode(min, max, true);
+			}
+
+		}
+			break;
 		}
 
 		return ret;

@@ -1923,6 +1923,18 @@ public class AADD extends DD {
 				ret = new AADDRNode(0, a1._dOffset - a2._dOffset, 0);
 			}
 				break;
+				
+			case COMP_LESSEQ: {
+				ret = new AADDRNode(0, a1._dOffset <= a2._dOffset ? 1d : 0d, 0);
+			}
+				break;
+
+			case COMP_GREATEQ: {
+				ret = new AADDRNode(0, a1._dOffset >= a2._dOffset ? 1d : 0d, 0);
+			}
+				break;
+				
+
 			default: {
 				System.out.println("Unknown operation: " + op);
 				System.exit(1);

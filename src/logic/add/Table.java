@@ -383,6 +383,28 @@ public class Table extends DD {
 			}
 		}
 			break;
+		case COMP_LESSEQ: {
+			for (int i = 0; i < entries; i++) {
+				for (int j = 0; j < nvars; j++) {
+					settings.set(j, (((i >> (nvars - j - 1)) & 1) == 1) ? TRUE
+							: FALSE);
+				}
+				tr.set(settings, (t1.projectAndEval(new_vars, settings) <= t2
+						.projectAndEval(new_vars, settings) ? 1d : 0d ) );
+			}
+		}
+			break;
+		case COMP_GREATEQ: {
+			for (int i = 0; i < entries; i++) {
+				for (int j = 0; j < nvars; j++) {
+					settings.set(j, (((i >> (nvars - j - 1)) & 1) == 1) ? TRUE
+							: FALSE);
+				}
+				tr.set(settings, (t1.projectAndEval(new_vars, settings) >= t2
+						.projectAndEval(new_vars, settings) ? 1d : 0d ) );
+			}
+		}
+			break;
 		default: {
 			System.out.println("Invalid operator: " + op);
 			System.exit(1);

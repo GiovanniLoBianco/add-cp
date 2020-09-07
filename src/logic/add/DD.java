@@ -46,8 +46,6 @@ public abstract class DD {
 
 
     // Boolean/Arithmetic operation codes
-    public static final int LOG_AND       = 10;
-    public static final int LOG_OR        = 11;
     public static final int ARITH_SUM     = 0;
     public static final int ARITH_PROD    = 1;
     public static final int ARITH_MIN     = 2;
@@ -56,6 +54,10 @@ public abstract class DD {
     public static final int ARITH_MINUS   = 5;
     public static final int RESTRICT_LOW  = 6;
     public static final int RESTRICT_HIGH = 7;
+    public static final int COMP_LESSEQ   = 8;
+    public static final int COMP_GREATEQ  = 9;
+    public static final int LOG_AND       = 10;
+    public static final int LOG_OR        = 11;
 
     // Pruning replacement types
     public static final int NO_REPLACE    = 0;
