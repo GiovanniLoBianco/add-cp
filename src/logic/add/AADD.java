@@ -66,6 +66,11 @@ public class AADD extends DD {
 	public static int APPLY_CACHE_HITS = 0;
 	public static int PRECISION_PRUNES = 0;
 	public static int IDENT_PRUNES = 0;
+	
+	// Giovanni
+	// Epsilon to relax resulting AADD after using applyInt with COMP_GREATEQ or COMP_LESSEQ
+	// This fixes most of the problem related to numerical imprecisions for these comparators
+	public static double EPSILON = 0.0001;
 
 	// Local data for AADD 
 	public AADD _this = this; // For inner classes to access
@@ -95,6 +100,7 @@ public class AADD extends DD {
 	public SAINodeIndex _tmpSAINode2 = new SAINodeIndex(INVALID, INVALID,
 			INVALID, -1, -1, -1, -1);
 	public ADDRNode _tmpADDRNode = new ADDRNode(INVALID);
+	
 
 	//public int        _nWhich;      // For range-keeping 1 = min, 2 = max
 
@@ -1925,12 +1931,12 @@ public class AADD extends DD {
 				break;
 				
 			case COMP_LESSEQ: {
-				ret = new AADDRNode(0, a1._dOffset <= a2._dOffset ? 1d : 0d, 0);
+				ret = new AADDRNode(0, a1._dOffset <= a2._dOffset + EPSILON ? 1d : 0d, 0);
 			}
 				break;
 
 			case COMP_GREATEQ: {
-				ret = new AADDRNode(0, a1._dOffset >= a2._dOffset ? 1d : 0d, 0);
+				ret = new AADDRNode(0, a1._dOffset + EPSILON >= a2._dOffset ? 1d : 0d, 0);
 			}
 				break;
 				
