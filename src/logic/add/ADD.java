@@ -51,6 +51,11 @@ public class ADD extends DD {
 	public static int MAX_PRUNE_CNT = 0;
 	public static int PRECISION_PRUNES = 0;
 	public static int PRUNE_CACHE_HITS = 0;
+	
+	// Giovanni
+	// Epsilon to relax resulting AADD after using applyInt with COMP_GREATEQ or COMP_LESSEQ
+	// This fixes most of the problem related to numerical imprecisions for these comparators
+	public static double EPSILON = 0.0001;
 
 	// Local data for ADD
 	public int _nLocalIDCnt; // counter for local ids
@@ -1438,8 +1443,8 @@ public class ADD extends DD {
 		
 		case COMP_LESSEQ: {
 			if ((a1 instanceof ADDDNode) && (a2 instanceof ADDDNode)) {
-				double min = ((ADDDNode) a1)._dLower <= ((ADDDNode) a2)._dLower ? 1d : 0d;
-				double max = ((ADDDNode) a1)._dUpper <= ((ADDDNode) a2)._dUpper ? 1d : 0d;
+				double min = ((ADDDNode) a1)._dLower <= ((ADDDNode) a2)._dLower + EPSILON ? 1d : 0d;
+				double max = ((ADDDNode) a1)._dUpper <= ((ADDDNode) a2)._dUpper + EPSILON ? 1d : 0d;
 				ret = getDNode(min, max, true);
 			}
 
@@ -1448,8 +1453,8 @@ public class ADD extends DD {
 
 		case COMP_GREATEQ: {
 			if ((a1 instanceof ADDDNode) && (a2 instanceof ADDDNode)) {
-				double min = ((ADDDNode) a1)._dLower >= ((ADDDNode) a2)._dLower ? 1d : 0d;
-				double max = ((ADDDNode) a1)._dUpper >= ((ADDDNode) a2)._dUpper ? 1d : 0d;
+				double min = ((ADDDNode) a1)._dLower + EPSILON >= ((ADDDNode) a2)._dLower ? 1d : 0d;
+				double max = ((ADDDNode) a1)._dUpper + EPSILON >= ((ADDDNode) a2)._dUpper ? 1d : 0d;
 				ret = getDNode(min, max, true);
 			}
 
